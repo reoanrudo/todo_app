@@ -4,7 +4,7 @@ use function Livewire\Volt\{state, mount, rules};
 use App\Models\Task;
 
 // フォームの状態を管理
-state(['task', 'description']);
+state(['task', 'title', 'description']);
 
 // ルートモデルバインディングはmountでまとめて行う
 mount(function (Task $task) {
@@ -21,7 +21,7 @@ rules([
 
 $update = function () {
     $this->validate(); // バリデーションチェック
-    $this->task->update($this->all());
+    $this->task->update($this->only('title', 'description'));
     return redirect()->route('tasks.show', $this->task);
 };
 
@@ -34,7 +34,7 @@ $update = function () {
     <!-- wire:submit="update"でフォーム送信時にupdate関数を呼び出し -->
     <form wire:submit="update">
         <p>
-            <label for="title">タイトル</label>
+            <label for="title">タスクのタイトル</label>
             @error('title')
                 <span class="error">({{ $message }})</span>
             @enderror
@@ -43,7 +43,7 @@ $update = function () {
             <input type="text" wire:model="title" id="title">
         </p>
         <p>
-            <label for="description">本文</label>
+            <label for="description">タスクの説明</label>
             @error('description')
                 <span class="error">({{ $message }})</span>
             @enderror
@@ -51,4 +51,6 @@ $update = function () {
             <!-- wire:model="description"で入力値とコンポーネントの状態($this->description)を自動的に同期 -->
             <textarea wire:model="description" id="description"></textarea>
         </p>
+        <button type="submit">更新する</button>
+    </form>
 </div>
