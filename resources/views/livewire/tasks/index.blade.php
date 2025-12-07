@@ -12,7 +12,7 @@ $create = function () {
 ?>
 
 <div>
-    <h1>タイトル一覧</h1>
+    <h1>タスク一覧</h1>
     <ul>
         @foreach ($tasks as $task)
             <li>

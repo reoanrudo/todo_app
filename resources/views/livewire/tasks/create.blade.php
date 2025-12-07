@@ -9,7 +9,6 @@ state(['title', 'description' => 1])
 rules([
     'title' => 'required|string|max:50',
     'body' => 'required|string|max:2000',
-    'priority' => 'required|integer|min:1|max:3',
 ]);
 
 // メモを保存する関数
